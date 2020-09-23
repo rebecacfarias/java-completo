@@ -29,7 +29,7 @@ public class Program {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter file path: ");   
+        System.out.print("Enter file path: ");   
         String path = sc.nextLine();
 
         try(BufferedReader br = new BufferedReader(new FileReader(path))){
@@ -42,16 +42,16 @@ public class Program {
                 line = br.readLine();
             }
 
-            System.out.println("Minimal salary to get list: ");
+            System.out.print("Minimal salary to get list: ");
             Double minimal = sc.nextDouble();
             sc.nextLine();
 
             Comparator<String> comp = (s1,s2) -> s1.toUpperCase().compareTo(s2.toUpperCase());
 
-            List<String> emailsList = employeeList.stream().filter(e -> e.getSalary() >= minimal).map(e -> e.getName()).sorted(comp)
+            List<String> emailsList = employeeList.stream().filter(e -> e.getSalary() >= minimal).map(e -> e.getEmail()).sorted(comp)
             .collect(Collectors.toList());
 
-            System.out.printf("\nEmails of employees with salary above %.2f:",minimal);
+            System.out.printf("\nEmails of employees with salary above %.2f: \n",minimal);
             emailsList.forEach(System.out::println);
             
             Double sum = employeeList.stream().filter(e -> e.getName().toUpperCase().charAt(0) == 'M').map(e -> e.getSalary()).reduce(0.0, (x,y) -> x+y);
